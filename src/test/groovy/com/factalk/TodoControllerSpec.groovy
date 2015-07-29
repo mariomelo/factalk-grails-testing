@@ -15,6 +15,10 @@ class TodoControllerSpec extends Specification {
     def cleanup() {
     }
 
+    static doWithSpring = {
+        previsaoTempoService(PrevisaoTempoService)
+    }
+
     def "Testa o sentido da vida"(){
     	expect: "O sentido da vida deve ser 42"
     		controller.getSentidoDaVida() == 42
