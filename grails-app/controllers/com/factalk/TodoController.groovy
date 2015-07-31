@@ -12,4 +12,8 @@ class TodoController {
     def getSentidoDaVida(){
     	42
     }
+
+    def goToIndex() {
+    	redirect action: 'index'
+    }
 }

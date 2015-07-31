@@ -35,4 +35,13 @@ class TodoControllerSpec extends Specification {
         then: "Ela deve me informar se vai chover"
         	response.text.contains "Vai chover hoje?"
 	}
+
+	def "Testa o redirecionamento pelo controlador"(){
+		when: "o link gotoindex é acessado"
+			controller.goToIndex()
+		then: "o usuário é redirecionado ao index"
+			response.redirectedUrl == '/todo/index'
+	}
+
+
 }
