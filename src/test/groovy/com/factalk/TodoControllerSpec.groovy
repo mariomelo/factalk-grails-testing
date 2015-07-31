@@ -28,4 +28,11 @@ class TodoControllerSpec extends Specification {
     	expect: "O serviço deve ter sido corretamente injetado no controlador"
     		controller.previsaoTempoService != null
 	}
+
+	def "Testa o texto retornado pelo controlador"(){
+		when: "acesso a página principal"
+        	controller.index()
+        then: "Ela deve me informar se vai chover"
+        	response.text.contains "Vai chover hoje?"
+	}
 }
