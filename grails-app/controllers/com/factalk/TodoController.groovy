@@ -34,4 +34,8 @@ class TodoController {
     	    	erro = "Token inválido"
     		}
     }
+
+    def sayMyName(){
+    	render view: "saymyname", model: [name: params.name]
+    }
 }
