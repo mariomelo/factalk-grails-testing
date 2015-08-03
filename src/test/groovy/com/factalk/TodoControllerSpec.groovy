@@ -43,5 +43,39 @@ class TodoControllerSpec extends Specification {
 			response.redirectedUrl == '/todo/index'
 	}
 
+	def "Testa renderização de views"(){
+		when: "o controlador de soma for chamado para somar 2+3"
+			params.numero1 = 2
+			params.numero2 = 3
+			controller.soma()
+		then: "A view soma.gsp deve ser renderizada com o resultado"
+			model.resultado == 5
+			view == '/todo/soma'
+	}
 
+	def "Testa o WebService JSON"(){
+		when: "um token válido é recebido pela aplicação"
+			request.json = '{token: "123"}'
+			controller.json()
+
+		then: "A resposta é recebida em formato JSON"
+			response.json.empresa == "Facta"
+			response.json.evento == "Factivity"
+			response.json.erro == null
+	}
+
+	def "Testa o WebService JSON"(){
+		when: "um token inválido é recebido"
+			controller.json()
+
+		then: "o erro é recebido em formato JSON"
+			response.json.empresa == null
+			response.json.erro == "Token inválido"
+	}
+
+	//Mocking Templates
+
+	//Integration Tests com @Rollback
+
+	//Geb Tests
 }
