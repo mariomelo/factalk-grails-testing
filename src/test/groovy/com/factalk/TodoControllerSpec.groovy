@@ -73,8 +73,5 @@ class TodoControllerSpec extends Specification {
 			response.json.erro == "Token inválido"
 	}
 
-	//Integration Tests com @Rollback
-
-
 	//Geb Tests
 }
