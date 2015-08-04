@@ -1,12 +1,14 @@
 package com.factalk
 
 import grails.test.mixin.TestFor
+import grails.test.mixin.Mock
 import spock.lang.Specification
 
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
 @TestFor(TodoController)
+@Mock(Livro)
 class TodoControllerSpec extends Specification {
 
     def setup() {
@@ -43,6 +45,16 @@ class TodoControllerSpec extends Specification {
 			response.redirectedUrl == '/todo/index'
 	}
 
+	def "Testa o lançamento de um novo volume do Factalk"(){
+		when: "lançamos um novo Factalk"
+			def livrosAntigos = Livro.count()
+			controller.ultimolivro()
+		
+		then: "A view deve receber a informação sobre o novo livro criado"
+			model.livro != null
+			Livro.count() == livrosAntigos + 1
+	}
+
 	def "Testa renderização de views"(){
 		when: "o controlador de soma for chamado para somar 2+3"
 			params.numero1 = 2
@@ -72,6 +84,4 @@ class TodoControllerSpec extends Specification {
 			response.json.empresa == null
 			response.json.erro == "Token inválido"
 	}
-
-	//Geb Tests
 }

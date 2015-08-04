@@ -38,4 +38,10 @@ class TodoController {
     def sayMyName(){
     	render view: "saymyname", model: [name: params.name]
     }
+
+    def ultimolivro(){
+        def livro = new Livro(nome: "Factalk - Volume " + Livro.count())
+        livro.save(flush: true)
+        render view: "ultimolivro", model: [livro: livro]
+    }
 }
